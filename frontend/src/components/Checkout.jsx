@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Checkout.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "/api";
 
 function Checkout({ cart, authToken, onBack, onOrderSuccess }) {
   const [customerName, setCustomerName] = useState("");
@@ -22,7 +22,7 @@ function Checkout({ cart, authToken, onBack, onOrderSuccess }) {
     try {
       setLoading(true);
 
-      const response = await fetch(`${API_URL}/api/orders`, {
+      const response = await fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

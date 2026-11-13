@@ -5,7 +5,7 @@ import OrderSuccess from "./components/OrderSuccess";
 import AuthPage from "./components/AuthPage";
 import "./App.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "/api";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -67,7 +67,7 @@ function App() {
           headers.Authorization = `Bearer ${authToken}`;
         }
 
-        const response = await fetch(`${API_URL}/api/cart`, {
+        const response = await fetch(`${API_URL}/cart`, {
           headers,
         });
         const data = await response.json();
@@ -109,7 +109,7 @@ function App() {
 
     const loadAuthenticatedUser = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/auth/me`, {
+        const response = await fetch(`${API_URL}/auth/me`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -164,7 +164,7 @@ function App() {
         }
 
         const response = await fetch(
-          `${API_URL}/api/products?${params.toString()}`
+          `${API_URL}/products?${params.toString()}`
         );
         const data = await response.json();
 
@@ -248,7 +248,7 @@ function App() {
         headers.Authorization = `Bearer ${authToken}`;
       }
 
-      const response = await fetch(`${API_URL}/api/cart`, {
+      const response = await fetch(`${API_URL}/cart`, {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -289,7 +289,7 @@ function App() {
       }
 
       const response = await fetch(
-        `${API_URL}/api/cart/${productId}`,
+        `${API_URL}/cart/${productId}`,
         {
           method: "DELETE",
           headers,

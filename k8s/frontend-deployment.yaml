@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: foodhub-frontend
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: foodhub-frontend
+
+  template:
+    metadata:
+      labels:
+        app: foodhub-frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: foodhub-frontend:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 80

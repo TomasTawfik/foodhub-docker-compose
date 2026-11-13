@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AuthPage.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "/api";
 
 function AuthPage({ initialMode, onBack, onAuthenticated }) {
   const [mode, setMode] = useState(initialMode);
@@ -22,7 +22,7 @@ function AuthPage({ initialMode, onBack, onAuthenticated }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `${API_URL}/api/auth/${isRegistering ? "register" : "login"}`,
+        `${API_URL}/auth/${isRegistering ? "register" : "login"}`,
         {
           method: "POST",
           headers: {

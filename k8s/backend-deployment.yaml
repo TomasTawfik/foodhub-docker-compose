@@ -1,0 +1,51 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foodhub-backend
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: foodhub-backend
+
+  template:
+    metadata:
+      labels:
+        app: foodhub-backend
+
+    spec:
+      containers:
+        - name: backend
+          image: foodhub-backend:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: DB_HOST
+              value: "foodhub-database-service"
+
+            - name: DB_PORT
+              value: "5432"
+
+            - name: DB_NAME
+              value: "foodhub"
+
+            - name: DB_USER
+              value: "postgres"
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: foodhub-secrets
+                  key: DB_PASSWORD
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: foodhub-secrets
+                  key: JWT_SECRET
